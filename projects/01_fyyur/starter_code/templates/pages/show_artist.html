@@ -74,5 +74,26 @@
 
 <a href="/artists/{{ artist.id }}/edit"><button class="btn btn-primary btn-lg">Edit</button></a>
 
+<!-- Adding Delete Botton -->
+<button 
+	type="button" 
+	class="btn btn-primary btn-lg" 
+	id="delete-btn" 
+	data-id="{{ artist.id }}">Delete</button>
+
+<script>
+	const deleteBtn = document.getElementById("delete-btn")
+	deleteBtn.onclick = function(e) {
+		const venue_id = e.target.dataset['id']
+		fetch('/artist/' + venue_id, {
+			method: 'DELETE'
+		}).then( response => {
+			if (response.redirected){
+				window.location.href = response.url;
+			}
+		});
+	}
+</script>
+
 {% endblock %}
 
